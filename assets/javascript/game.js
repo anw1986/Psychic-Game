@@ -26,50 +26,65 @@ document.onkeyup=function(event){
 
     var charCode=event.keyCode;
 
-    //check condition if user enters letters
+    console.log(userguess);
+
+    //check condition if user enters letters only
  
     if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 8){
-        
-        userguess[x]=String.fromCharCode(event.keyCode).toLowerCase();
-        
-        document.getElementById("guess").innerHTML=userguess;
-        
-        count_guess--;
-        document.getElementById("guess_left").innerHTML=count_guess;
-        
-        // Check for win condition
-        
-        if (userguess[x]===comp_choice){
-            alert("Kuddos!! on guessing the letter" +" "+comp_choice);
-            win++; 
-            document.getElementById("win").innerHTML=win;
-            userguess =[];
-            document.getElementById("guess").innerHTML=userguess;
-            count_guess=9;
-            document.getElementById("guess_left").innerHTML=count_guess;
-            x=0;
+
+        //check condition if element already exist in array
+
+        if(userguess.includes(String.fromCharCode(event.keyCode).toLowerCase())===true){
+            alert("letter already exist");
+        }
+
+        else{
+
+            //if the element is "new" continue code line
+
+            userguess[x]=String.fromCharCode(event.keyCode).toLowerCase();
             
-            // re-start with new computer guess
-            comp_choice=comp_letters[Math.floor(Math.random() * comp_letters.length)];
+            document.getElementById("guess").innerHTML=userguess;
+            
+            count_guess--;
+            document.getElementById("guess_left").innerHTML=count_guess;
+            
+            // Check for win condition
+            
+            if (userguess[x]===comp_choice){
+                alert("Kuddos!! on guessing the letter" +" "+comp_choice);
+                win++; 
+                document.getElementById("win").innerHTML=win;
+                userguess =[];
+                document.getElementById("guess").innerHTML=userguess;
+                count_guess=9;
+                document.getElementById("guess_left").innerHTML=count_guess;
+                x=0;
+                
+                // re-start with new computer guess
+                comp_choice=comp_letters[Math.floor(Math.random() * comp_letters.length)];
+                return;
+            };
+            
+            // Check if user is unable to guess
+            
+            if (count_guess===0){
+                alert("Sorry!! You were unable to guess the letter"+" "+comp_choice);
+                loss++
+                document.getElementById("loss").innerHTML=loss;
+                userguess =[];
+                document.getElementById("guess").innerHTML=userguess;
+                count_guess=9;
+                document.getElementById("guess_left").innerHTML=count_guess;
+                x=0;
+                
+                // re-start with new computer guess
+                comp_choice=comp_letters[Math.floor(Math.random() * comp_letters.length)];
+                return;
+            };   
+            
+            x++;
         };
-        
-        // Check if user is unable to guess
-        
-        if (count_guess===0){
-            alert("Sorry!! You were unable to guess the letter"+" "+comp_choice);
-            loss++
-            document.getElementById("loss").innerHTML=loss;
-            userguess =[];
-            document.getElementById("guess").innerHTML=userguess;
-            count_guess=9;
-            document.getElementById("guess_left").innerHTML=count_guess;
-            x=0;
-            
-            // re-start with new computer guess
-            comp_choice=comp_letters[Math.floor(Math.random() * comp_letters.length)];
-        };   
-        
-        x++;
         console.log(comp_choice);
     }
    
