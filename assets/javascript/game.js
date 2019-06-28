@@ -5,18 +5,22 @@
 // 3 compare user ENTERED data to compuer generated letter
 // 4 if same update win counter reset else decrese guesses left
 
-
+// Initialize variables
 var count_guess=9;
 var userguess=[];
 var x=0;
 var win=0;
 var loss=0;
 
+// initialize computer guess
 var comp_letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 comp_choice=comp_letters[Math.floor(Math.random() * comp_letters.length)];
 console.log(comp_choice);
-// console.log(count_guess);
+
+// Output counter variables on html
 document.getElementById("guess_left").innerHTML=count_guess;
+document.getElementById("win").innerHTML=win;
+document.getElementById("loss").innerHTML=loss;
 
 document.onkeyup=function(){
     
@@ -25,13 +29,34 @@ document.onkeyup=function(){
     document.getElementById("guess").innerHTML=userguess;
 
     count_guess--;
-    console.log(x++);
+    x++;
     document.getElementById("guess_left").innerHTML=count_guess;
     
-    if (count_guess===0){
-        alert("unable to guess letter")
-    }
-}
+    // Enter condition if user wins
 
+    
+
+    if (userguess==comp_choice){
+        win++;
+        document.getElementById("win").innerHTML=win;
+        userguess =[];
+        document.getElementById("guess").innerHTML=userguess;
+        count_guess=9;
+        x=0;
+    };
+
+    // User doesn't guess
+    if (count_guess===0){
+        alert("unable to guess letter");
+        loss++
+        document.getElementById("loss").innerHTML=loss;
+        userguess =[];
+        document.getElementById("guess").innerHTML=userguess;
+        count_guess=9;
+        x=0;
+    }   
+
+    debugger;
+};
 
 
