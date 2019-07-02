@@ -26,7 +26,7 @@ document.onkeyup=function(event){
 
     var charCode=event.keyCode;
 
-    console.log(userguess);
+    
 
     //check condition if user enters letters only
  
@@ -43,6 +43,7 @@ document.onkeyup=function(event){
             //if the element is "new" continue code line
 
             userguess[x]=String.fromCharCode(event.keyCode).toLowerCase();
+            console.log(userguess);
             
             document.getElementById("guess").innerHTML=userguess;
             
